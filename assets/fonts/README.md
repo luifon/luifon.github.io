@@ -11,3 +11,10 @@ The `-latin` files are subsets of the release files made with fontTools
 (`pyftsubset --layout-features='*' --flavor=woff2`) for the code points
 U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
 U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2199, U+2212, U+2215, U+FEFF, U+FFFD.
+
+`JetBrainsMono-Regular-heatmap.woff2` is a smaller subset of
+`JetBrainsMono-Regular-latin.woff2` with only the characters of the GitHub
+activity heatmap labels. `scripts/github-activity.mjs` embeds it in
+`images/github-activity.svg`, because an SVG shown through `<img>` cannot load
+the page's fonts. It was made with:
+`pyftsubset JetBrainsMono-Regular-latin.woff2 --text="JanFebMarAprMayJunJulAugSepOctNovDecMonWedFriLessMore 0123456789," --flavor=woff2 --layout-features='' --no-hinting --desubroutinize`

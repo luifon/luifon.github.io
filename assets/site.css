@@ -169,3 +169,16 @@ body.lb-open { overflow:hidden; }
 }
 
 .beta { color: var(--faint, #858585); font-weight: 400; font-size: .7em; }
+
+/* GitHub activity heatmap (images/github-activity.svg, scripts/github-activity.mjs).
+   On narrow screens the heatmap keeps a readable size and scrolls sideways;
+   direction:rtl makes the scroll start at the most recent weeks. */
+.heatmap { overflow-x:auto; direction:rtl; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+.heatmap a { display:block; direction:ltr; border-radius:4px; }
+.heatmap img { display:block; width:100%; height:auto; }
+.activity { margin:16px 0 0; font-size:15px; }
+.activity .more-inline { display:inline-flex; gap:4px; font:500 14px var(--mono); color:var(--text); }
+.activity .more-inline:hover { color:var(--accent); }
+@media (max-width:640px) {
+  .heatmap a { width:620px; }
+}

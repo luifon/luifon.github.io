@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Daily rebuild so that the GitHub activity heatmap stays current.
+    - cron: '17 6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -22,6 +25,17 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # Regenerates images/github-activity.svg, assets/github-activity.json and the
+      # block in index.html. When the API call fails, the script changes no file,
+      # so the committed versions are deployed.
+      - name: Update GitHub activity
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/github-activity.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
