@@ -9,7 +9,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  # write: the scheduled run commits the regenerated heatmap (see below).
+  contents: write
   pages: write
   id-token: write
 
@@ -36,6 +37,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/github-activity.mjs
+      # GitHub disables scheduled workflows in a public repository after 60 days
+      # without repository activity. Committing the regenerated heatmap on the
+      # scheduled and manual runs keeps the repository active. A push made with
+      # GITHUB_TOKEN does not start another workflow run, so this cannot loop.
+      - name: Commit the updated GitHub activity
+        if: github.event_name != 'push'
+        continue-on-error: true
+        run: |
+          git add images/github-activity.svg assets/github-activity.json index.html
+          if git diff --cached --quiet; then
+            echo "No change in the GitHub activity."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Update GitHub activity ($(date -u +%Y-%m-%d))"
+          git push origin HEAD:main
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
