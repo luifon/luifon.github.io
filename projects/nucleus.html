@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nucleus · Luiz Consalter</title>
+<meta name="description" content="Nucleus: a personal AI-agent system that runs Claude Code CLI sessions in tmux as its agent engine.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://luifon.github.io/projects/nucleus.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Luiz Consalter">
+<meta property="og:title" content="Nucleus · Luiz Consalter">
+<meta property="og:description" content="Nucleus: a personal AI-agent system that runs Claude Code CLI sessions in tmux as its agent engine.">
+<meta property="og:url" content="https://luifon.github.io/projects/nucleus.html">
+<meta property="og:image" content="https://luifon.github.io/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Luiz Consalter, Senior Full-Stack and Forward Deployed Engineer. Side projects: Nucleus, Junto, Northmark.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nucleus · Luiz Consalter">
+<meta name="twitter:description" content="Nucleus: a personal AI-agent system that runs Claude Code CLI sessions in tmux as its agent engine.">
+<meta name="twitter:image" content="https://luifon.github.io/images/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/Inter-Regular-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="wrap">
+
+  <header class="side">
+    <div>
+      <a class="back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+      <h1>Nucleus</h1>
+      <p class="title">Personal AI-agent system</p>
+      <p class="line">Side project by Luiz Consalter.</p>
+      <nav class="sections" aria-label="Sections">
+        <ul>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#decisions">Decisions</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#walkthrough">Walkthrough</a></li>
+          <li><a href="#screenshots">Videos and screenshots</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="contact">
+      <a href="https://github.com/luifon" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+      <a href="https://linkedin.com/in/luiz-consalter" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
+      <a href="mailto:luizconsalter.work@gmail.com" aria-label="Email" title="luizconsalter.work@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
+    </div>
+  </header>
+
+  <main id="content">
+    <section id="overview" aria-label="Overview">
+      <h2>Overview</h2>
+      <p>Nucleus is a personal assistant system built around the Claude Code CLI. It connects Claude to a Discord bot, a WhatsApp bot, scheduled jobs and an operator dashboard. It runs on one macOS machine as a set of launchd services, all started from one Rust binary.</p>
+      <p>Every agent call runs in a long-lived interactive Claude Code session inside a tmux window. The bots, the scheduled jobs and the dashboard chat all reach the model through these sessions; Nucleus has no other path to a model.</p>
+      <p>The design is recorded in 49 architecture decision records in the repository.</p>
+      <div class="links">
+        <a href="https://github.com/luifon/nucleus" target="_blank" rel="noreferrer">Source on GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section id="architecture" aria-label="Architecture">
+      <h2>Architecture</h2>
+<figure class="diagram">
+  <svg viewBox="0 0 820 480" role="img" aria-label="Nucleus architecture">
+    <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#707070"/></marker><marker id="a0" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M10 0 0 5 10 10z" fill="#707070"/></marker></defs>
+    <rect x="20" y="20" width="180" height="80" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="32" y="42" font-size="13" font-weight="500" fill="#e5e5e5">Discord bot</text>
+    <text x="32" y="59" font-size="11.5" fill="#a3a3a3">Rust, serenity</text>
+    <text x="32" y="76" font-size="11.5" fill="#a3a3a3">session per channel</text>
+    <line x1="110" y1="100" x2="110" y2="146" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <rect x="220" y="20" width="180" height="80" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="232" y="42" font-size="13" font-weight="500" fill="#e5e5e5">WhatsApp bot</text>
+    <text x="232" y="59" font-size="11.5" fill="#a3a3a3">TypeScript, Baileys</text>
+    <text x="232" y="76" font-size="11.5" fill="#a3a3a3">whisper.cpp for voice</text>
+    <line x1="310" y1="100" x2="310" y2="146" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <rect x="420" y="20" width="180" height="80" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="432" y="42" font-size="13" font-weight="500" fill="#e5e5e5">Dashboard</text>
+    <text x="432" y="59" font-size="11.5" fill="#a3a3a3">axum API, React app</text>
+    <text x="432" y="76" font-size="11.5" fill="#a3a3a3">work, agents, usage</text>
+    <line x1="510" y1="100" x2="510" y2="146" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <rect x="620" y="20" width="180" height="80" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="632" y="42" font-size="13" font-weight="500" fill="#e5e5e5">Scheduled jobs</text>
+    <text x="632" y="59" font-size="11.5" fill="#a3a3a3">news, distiller,</text>
+    <text x="632" y="76" font-size="11.5" fill="#a3a3a3">reminders, skills</text>
+    <line x1="710" y1="100" x2="710" y2="146" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <rect x="20" y="150" width="780" height="80" rx="6" fill="#0f0f0f" stroke="#e6b450"/>
+    <text x="32" y="172" font-size="13" font-weight="500" fill="#e5e5e5">nucleus-core: Session and SessionPool</text>
+    <text x="32" y="189" font-size="11.5" fill="#a3a3a3">the one path to the agent: persona, permission mode, blocked commands,</text>
+    <text x="32" y="206" font-size="11.5" fill="#a3a3a3">tmux window lifecycle, transcript reading, end-of-turn detection</text>
+    <line x1="250" y1="230" x2="250" y2="286" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="258" y="262" font-size="11" fill="#e6b450" text-anchor="start">starts and resumes</text>
+    <line x1="650" y1="230" x2="650" y2="286" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="658" y="262" font-size="11" fill="#e6b450" text-anchor="start">reads and promotes</text>
+    <rect x="20" y="290" width="500" height="80" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="32" y="312" font-size="13" font-weight="500" fill="#e5e5e5">tmux server</text>
+    <text x="32" y="329" font-size="11.5" fill="#a3a3a3">one interactive Claude Code session per chat or job</text>
+    <text x="32" y="346" font-size="11.5" fill="#a3a3a3">attach to a window to watch a turn as it runs</text>
+    <rect x="540" y="290" width="260" height="170" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="552" y="312" font-size="13" font-weight="500" fill="#e5e5e5">Memory tiers</text>
+    <text x="552" y="329" font-size="11.5" fill="#a3a3a3">T1   session state, SQLite</text>
+    <text x="552" y="346" font-size="11.5" fill="#a3a3a3">T1.5 diary per agent, 7 days</text>
+    <text x="552" y="363" font-size="11.5" fill="#a3a3a3">T2   shared facts, loaded</text>
+    <text x="552" y="380" font-size="11.5" fill="#a3a3a3">     into every session</text>
+    <text x="552" y="397" font-size="11.5" fill="#a3a3a3">T3   notes vault (PARA),</text>
+    <text x="552" y="414" font-size="11.5" fill="#a3a3a3">     read on demand</text>
+    <line x1="270" y1="370" x2="270" y2="396" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <rect x="20" y="400" width="500" height="60" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="32" y="422" font-size="13" font-weight="500" fill="#e5e5e5">Operator approvals</text>
+    <text x="32" y="439" font-size="11.5" fill="#a3a3a3">mail, pushes, deletes and form submissions wait</text>
+  </svg>
+  <figcaption>Every component that needs the agent goes through nucleus-core, which starts or resumes a Claude Code session in a tmux window.</figcaption>
+</figure>
+    </section>
+
+    <section id="decisions" aria-label="Decisions and features">
+      <h2>Decisions and features</h2>
+      <h3 class="sub">Claude Code sessions in tmux as the agent engine</h3>
+      <p>Each Discord channel and each WhatsApp chat has its own session, and each scheduled job starts a session of its own. A chat session stays alive between messages and is resumed for the next message, so a follow-up does not wait for a new session to start. The operator can attach to a tmux window and watch a turn while it runs.</p>
+      <p>Every Rust component reaches Claude through one type in the <code>nucleus-core</code> library, <code>Session</code> for one-shot work or <code>SessionPool</code> for one persistent session per chat. That type sets the persona, the permission mode and the blocked commands, manages the tmux window and reads the session transcript. The WhatsApp bot uses a TypeScript port of the same type.</p>
+      <p>The WhatsApp bot uses a turn engine that follows the session transcript and replies only when the turn has ended. It replaced a fixed silence timeout that sometimes sent text written before a slow tool call as the answer. Long work can run as a background task, so the conversation can continue while it runs.</p>
+      <h3 class="sub">Memory tiers</h3>
+      <p>Memory is divided by lifetime and scope. Tier 1 is per-chat session state, in one SQLite database per bot. Tier 1.5 is a daily diary per agent, kept for seven days. Tier 2 is a set of shared facts in Claude Code's auto-memory directory, which every Nucleus session loads at start. Tier 3 is a notes vault organized with the PARA method, which sessions read when they need it.</p>
+      <p>A daily distiller job reads the diaries and decides for each observation whether to promote it to shared memory, merge it with an existing fact, archive it or drop it. Vector search was evaluated and deferred: sessions find long-term information in the vault through file names and frontmatter.</p>
+      <h3 class="sub">Permissions and approvals</h3>
+      <p>Sessions run without a person watching them, so they cannot wait for interactive permission prompts. They use Claude Code's automatic permission mode together with a list of blocked commands, and the bots answer only accounts on an allowlist.</p>
+      <p>Actions with effects outside the machine wait for the operator's approval: sending mail, calendar events that invite other people, browser form submissions, git pushes outside the work pipeline, and deletes outside the session's working folder. Before a delete or an overwrite runs, a hook shows the exact list of files that it would change.</p>
+      <h3 class="sub">Reminders</h3>
+      <p>A reminder is the one model for every time-triggered notification. It has a body, a cron expression in the operator's time zone, a one-shot flag and one or more delivery channels: Discord, WhatsApp or the calendar. One worker runs every minute and delivers what is due, with pause, resume and a retry for each channel.</p>
+      <p>A user asks either bot for a reminder in plain language, and the session creates it with the <code>reminders</code> command. A reminder can also start a session at its time, which runs a skill.</p>
+      <h3 class="sub">Skills</h3>
+      <p>Procedures are stored as Claude Code skills in the native <code>SKILL.md</code> format, so Nucleus needs no skill loader of its own. Skills for working on Nucleus are committed in the repository. Skills for the operator's own routines are in a separate local folder that is not committed.</p>
+      <p>A daily skill-gap learner reads session transcripts and proposes new skills for the operator to accept.</p>
+      <h3 class="sub">Work items and the dashboard</h3>
+      <p>GitHub issues with a Nucleus label become work items. A read-only agent classifies each item. A complex item is discussed with the operator on the dashboard until the operator approves a plan. An implementation agent then works in a separate clone, and Nucleus opens a draft pull request. Nucleus never merges.</p>
+      <p>The dashboard is one axum server with a React app. It shows every agent and its live state from a registry file, the work items, skills, diaries, reminders and usage.</p>
+    </section>
+
+    <section id="stack" aria-label="Stack">
+      <h2>Stack</h2>
+      <dl class="stack">
+        <dt>Languages</dt><dd>Rust (2021 edition), TypeScript</dd>
+        <dt>Server</dt><dd>Tokio, axum, tower-http, reqwest, figment</dd>
+        <dt>Data</dt><dd>SQLite through sqlx, with compile-time checked queries</dd>
+        <dt>Messaging</dt><dd>serenity for Discord, Baileys for WhatsApp, whisper.cpp and ffmpeg for voice notes</dd>
+        <dt>Dashboard</dt><dd>React 19, React Router, Tailwind CSS 4, Vite</dd>
+        <dt>Agent</dt><dd>Claude Code CLI, tmux</dd>
+        <dt>Operations</dt><dd>launchd services on macOS, one Rust binary with a subcommand per service</dd>
+      </dl>
+    </section>
+
+    <section id="walkthrough" aria-label="Walkthrough">
+      <h2>Walkthrough</h2>
+      <figure class="walkthrough">
+        <video id="walkthrough-video" controls playsinline preload="none" width="1440" height="900" data-poster="../videos/nucleus-walkthrough.webp" data-poster-narrow="../videos/nucleus-walkthrough-800.webp" aria-label="Nucleus dashboard walkthrough">
+          <source src="../videos/nucleus-walkthrough-800.webm" type="video/webm" media="(max-width: 800px)">
+          <source src="../videos/nucleus-walkthrough-800.mp4" type="video/mp4" media="(max-width: 800px)">
+          <source src="../videos/nucleus-walkthrough.webm" type="video/webm">
+          <source src="../videos/nucleus-walkthrough.mp4" type="video/mp4">
+        </video>
+        <figcaption><span class="dur">1:24</span> · The operator dashboard: a chat with the agent, a work item from its first plan to review, then the agents, tasks, reminders, skills and usage pages. No sound. <button class="expand" type="button" data-gallery="nucleus" data-video="../videos/nucleus-walkthrough" data-poster="../videos/nucleus-walkthrough.webp" data-width="1440" data-height="900" data-loop="false" data-from="walkthrough-video" data-caption="Nucleus dashboard walkthrough (1:24)">Open in the full-window viewer</button></figcaption>
+        <ol class="chapters" aria-label="Chapters">
+          <li><button type="button" data-t="0"><span class="ts">0:00</span>Dashboard</button></li>
+          <li><button type="button" data-t="6"><span class="ts">0:06</span>Chat</button></li>
+          <li><button type="button" data-t="18"><span class="ts">0:18</span>Work item and plan v1</button></li>
+          <li><button type="button" data-t="30"><span class="ts">0:30</span>Plan v2 approval</button></li>
+          <li><button type="button" data-t="39"><span class="ts">0:39</span>Implementation and review</button></li>
+          <li><button type="button" data-t="47"><span class="ts">0:47</span>Agents</button></li>
+          <li><button type="button" data-t="52"><span class="ts">0:52</span>Tasks</button></li>
+          <li><button type="button" data-t="63"><span class="ts">1:03</span>Reminders</button></li>
+          <li><button type="button" data-t="69"><span class="ts">1:09</span>Skills</button></li>
+          <li><button type="button" data-t="77"><span class="ts">1:17</span>Usage</button></li>
+        </ol>
+      </figure>
+    </section>
+
+    <section id="screenshots" aria-label="Videos and screenshots">
+      <h2>Videos and screenshots</h2>
+      <div class="gallery">
+        <figure><button class="thumb" type="button" data-gallery="nucleus" data-video="../videos/nucleus-plan-approval" data-poster="../videos/nucleus-plan-approval.webp" data-width="1440" data-height="900" data-caption="Nucleus dashboard: approving plan v2 of a work item, after which the agent starts the implementation" aria-label="Open video: Video: approving plan v2 of a work item; the agent then starts the implementation"><video class="clip" muted loop playsinline preload="none" poster="../videos/nucleus-plan-approval-800.webp" width="800" height="500" aria-label="Nucleus dashboard: approving plan v2 of a work item, after which the agent starts the implementation"><source src="../videos/nucleus-plan-approval-800.webm" type="video/webm"><source src="../videos/nucleus-plan-approval-800.mp4" type="video/mp4"></video></button><figcaption>Video: approving plan v2 of a work item; the agent then starts the implementation</figcaption></figure>
+        <figure><button class="thumb" type="button" data-gallery="nucleus" data-video="../videos/nucleus-tasks" data-poster="../videos/nucleus-tasks.webp" data-width="1440" data-height="900" data-caption="Nucleus dashboard: tasks page refreshing while background tasks start, finish and are added" aria-label="Open video: Video: tasks page refreshing while background tasks start, finish and are added"><video class="clip" muted loop playsinline preload="none" poster="../videos/nucleus-tasks-800.webp" width="800" height="500" aria-label="Nucleus dashboard: tasks page refreshing while background tasks start, finish and are added"><source src="../videos/nucleus-tasks-800.webm" type="video/webm"><source src="../videos/nucleus-tasks-800.mp4" type="video/mp4"></video></button><figcaption>Video: tasks page refreshing while background tasks start, finish and are added</figcaption></figure>
+        <figure><button class="thumb" type="button" data-gallery="nucleus" data-full="../images/nucleus-agents-1600.webp" data-caption="Dashboard: agents page" aria-label="Open screenshot: Dashboard: agents page"><img src="../images/nucleus-agents-800.webp" srcset="../images/nucleus-agents-800.webp 800w, ../images/nucleus-agents-1600.webp 1600w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1023px) calc(50vw - 34px), 330px" width="800" height="500" alt="Dashboard: agents page" loading="lazy" decoding="async"></button><figcaption>Dashboard: agents page</figcaption></figure>
+        <figure><button class="thumb" type="button" data-gallery="nucleus" data-full="../images/nucleus-work-1600.webp" data-caption="Dashboard: work items page" aria-label="Open screenshot: Dashboard: work items page"><img src="../images/nucleus-work-800.webp" srcset="../images/nucleus-work-800.webp 800w, ../images/nucleus-work-1600.webp 1600w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1023px) calc(50vw - 34px), 330px" width="800" height="500" alt="Dashboard: work items page" loading="lazy" decoding="async"></button><figcaption>Dashboard: work items page</figcaption></figure>
+        <figure><button class="thumb" type="button" data-gallery="nucleus" data-full="../images/nucleus-usage-1600.webp" data-caption="Dashboard: usage page" aria-label="Open screenshot: Dashboard: usage page"><img src="../images/nucleus-usage-800.webp" srcset="../images/nucleus-usage-800.webp 800w, ../images/nucleus-usage-1600.webp 1600w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1023px) calc(50vw - 34px), 330px" width="800" height="500" alt="Dashboard: usage page" loading="lazy" decoding="async"></button><figcaption>Dashboard: usage page</figcaption></figure>
+      </div>
+    </section>
+
+    <footer><a href="../index.html">Luiz Consalter</a> · São Paulo, Brazil</footer>
+  </main>
+
+</div>
+<script src="../assets/site.js" defer></script>
+<script src="../assets/lightbox.js" defer></script>
+<script src="../assets/clips.js" defer></script>
+<script src="../assets/walkthrough.js" defer></script>
+</body>
+</html>

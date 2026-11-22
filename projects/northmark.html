@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northmark · Luiz Consalter</title>
+<meta name="description" content="Northmark: a career-intelligence web application for software developers, with in-browser coding lessons.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://luifon.github.io/projects/northmark.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Luiz Consalter">
+<meta property="og:title" content="Northmark · Luiz Consalter">
+<meta property="og:description" content="Northmark: a career-intelligence web application for software developers, with in-browser coding lessons.">
+<meta property="og:url" content="https://luifon.github.io/projects/northmark.html">
+<meta property="og:image" content="https://luifon.github.io/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Luiz Consalter, Senior Full-Stack and Forward Deployed Engineer. Side projects: Nucleus, Junto, Northmark.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Northmark · Luiz Consalter">
+<meta name="twitter:description" content="Northmark: a career-intelligence web application for software developers, with in-browser coding lessons.">
+<meta name="twitter:image" content="https://luifon.github.io/images/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/Inter-Regular-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="wrap">
+
+  <header class="side">
+    <div>
+      <a class="back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+      <h1>Northmark <span class="beta">(Beta)</span></h1>
+      <p class="title">Career-intelligence web application</p>
+      <p class="line">Side project by Luiz Consalter.</p>
+      <nav class="sections" aria-label="Sections">
+        <ul>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#decisions">Decisions</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#walkthrough">Walkthrough</a></li>
+          <li><a href="#screenshots">Screenshots</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="contact">
+      <a href="https://github.com/luifon" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+      <a href="https://linkedin.com/in/luiz-consalter" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
+      <a href="mailto:luizconsalter.work@gmail.com" aria-label="Email" title="luizconsalter.work@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
+    </div>
+  </header>
+
+  <main id="content">
+    <section id="overview" aria-label="Overview">
+      <h2>Overview</h2>
+      <p>Northmark is a web application for software developers. Its product document describes a career-intelligence platform: a weekly batch pipeline turns job-market, compensation and skill-trend data into insights that help a developer decide which skills to learn, which certifications to get, and whether their pay matches the market.</p>
+      <p>The code also contains a learning part: a skill roadmap and coding lessons with an editor, a terminal and automated tests in the browser. Lessons in JavaScript and TypeScript run in WebContainers. Lessons in Go, Python, Java, Kotlin, Spring Boot and NestJS run on a separate container service.</p>
+      <div class="links">
+        <a href="https://northmark-gray.vercel.app" target="_blank" rel="noreferrer">Live site <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section id="architecture" aria-label="Architecture">
+      <h2>Architecture</h2>
+<figure class="diagram">
+  <svg viewBox="0 0 820 450" role="img" aria-label="Northmark architecture">
+    <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#707070"/></marker><marker id="a0" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M10 0 0 5 10 10z" fill="#707070"/></marker></defs>
+    <rect x="20" y="20" width="290" height="98" rx="6" fill="#0f0f0f" stroke="#e6b450"/>
+    <text x="32" y="42" font-size="13" font-weight="500" fill="#e5e5e5">Browser: Next.js app</text>
+    <text x="32" y="59" font-size="11.5" fill="#a3a3a3">insights, skills, roadmap, lessons</text>
+    <text x="32" y="76" font-size="11.5" fill="#a3a3a3">Monaco editor, xterm.js terminal</text>
+    <text x="32" y="93" font-size="11.5" fill="#a3a3a3">hosted on Vercel</text>
+    <rect x="20" y="190" width="290" height="64" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="32" y="212" font-size="13" font-weight="500" fill="#e5e5e5">WebContainers</text>
+    <text x="32" y="229" font-size="11.5" fill="#a3a3a3">Node.js in the browser tab</text>
+    <rect x="400" y="20" width="200" height="98" rx="6" fill="#0f0f0f" stroke="#e6b450"/>
+    <text x="412" y="42" font-size="13" font-weight="500" fill="#e5e5e5">Container service</text>
+    <text x="412" y="59" font-size="11.5" fill="#a3a3a3">Node.js, Fastify</text>
+    <text x="412" y="76" font-size="11.5" fill="#a3a3a3">WebSocket relay</text>
+    <text x="412" y="93" font-size="11.5" fill="#a3a3a3">session per learner</text>
+    <rect x="640" y="20" width="160" height="166" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="652" y="42" font-size="13" font-weight="500" fill="#e5e5e5">Lesson container</text>
+    <text x="652" y="59" font-size="11.5" fill="#a3a3a3">one per learner</text>
+    <text x="652" y="76" font-size="11.5" fill="#a3a3a3">Go agent: write,</text>
+    <text x="652" y="93" font-size="11.5" fill="#a3a3a3">run, test, stdin</text>
+    <text x="652" y="110" font-size="11.5" fill="#a3a3a3">images: Go, Python,</text>
+    <text x="652" y="127" font-size="11.5" fill="#a3a3a3">Java, Kotlin,</text>
+    <text x="652" y="144" font-size="11.5" fill="#a3a3a3">Spring Boot, NestJS</text>
+    <rect x="400" y="200" width="200" height="98" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="412" y="222" font-size="13" font-weight="500" fill="#e5e5e5">Supabase</text>
+    <text x="412" y="239" font-size="11.5" fill="#a3a3a3">Postgres with RLS</text>
+    <text x="412" y="256" font-size="11.5" fill="#a3a3a3">Auth: Google, GitHub</text>
+    <text x="412" y="273" font-size="11.5" fill="#a3a3a3">Edge Functions</text>
+    <rect x="20" y="330" width="290" height="100" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="32" y="352" font-size="13" font-weight="500" fill="#e5e5e5">Insight pipeline</text>
+    <text x="32" y="369" font-size="11.5" fill="#a3a3a3">TypeScript scripts: load data,</text>
+    <text x="32" y="386" font-size="11.5" fill="#a3a3a3">score each skill, write a</text>
+    <text x="32" y="403" font-size="11.5" fill="#a3a3a3">summary with a language model</text>
+    <rect x="640" y="330" width="160" height="64" rx="6" fill="#0f0f0f" stroke="#3a3a3a"/>
+    <text x="652" y="352" font-size="13" font-weight="500" fill="#e5e5e5">Stripe</text>
+    <text x="652" y="369" font-size="11.5" fill="#a3a3a3">checkout, webhook</text>
+    <line x1="165" y1="118" x2="165" y2="188" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="173" y="158" font-size="11" fill="#e6b450" text-anchor="start">JS and TS lessons</text>
+    <line x1="310" y1="50" x2="398" y2="50" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="354" y="42" font-size="11" fill="#e6b450" text-anchor="middle">WebSocket</text>
+    <line x1="600" y1="69" x2="638" y2="69" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <line x1="310" y1="110" x2="398" y2="215" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="345" y="145" font-size="11" fill="#e6b450" text-anchor="start">data, auth</text>
+    <line x1="500" y1="118" x2="500" y2="198" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="508" y="162" font-size="11" fill="#e6b450" text-anchor="start">checks JWT</text>
+    <line x1="310" y1="380" x2="398" y2="280" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="360" y="352" font-size="11" fill="#e6b450" text-anchor="start">stores results</text>
+    <line x1="638" y1="362" x2="602" y2="280" stroke="#707070" stroke-width="1.3" marker-end="url(#a1)"/>
+    <text x="632" y="316" font-size="11" fill="#e6b450" text-anchor="start">plan status</text>
+  </svg>
+  <figcaption>Lessons in JavaScript and TypeScript run in the browser with WebContainers. Lessons in other languages run in a container that the container service starts for the learner.</figcaption>
+</figure>
+    </section>
+
+    <section id="decisions" aria-label="Decisions and features">
+      <h2>Decisions and features</h2>
+      <h3 class="sub">A container service for lessons that WebContainers cannot run</h3>
+      <p>WebContainers run Node.js inside the browser tab, so they cannot run a Go compiler, a JVM or a Python interpreter. For those lessons Northmark has its own container service, written in TypeScript with Fastify.</p>
+      <p>The lesson page asks the service for a session and sends the learner's Supabase token. The service verifies the token against the project's public keys, starts one container for that learner (replacing an earlier one) and returns a session with a one-time ticket for the WebSocket. Over the WebSocket the page sends file writes, run and test commands and terminal input. The service passes them to a small agent written in Go inside the container and sends the output back to the page.</p>
+      <p>Each lesson language has its own image, built on a common base image that contains the agent. The service removes a container when the learner leaves or the session is idle, and a periodic sweep removes containers that no session owns.</p>
+      <h3 class="sub">Insight pipeline</h3>
+      <p>The product document describes a weekly batch: the model work runs once a week, and every user reads the stored output. The repository contains TypeScript scripts that load the collected data for each skill (job-posting counts, GitHub repository activity, search trends and Reddit sentiment), compute normalized scores, momentum labels and competition levels, ask a language model through OpenRouter for a structured insight per skill, and store the results in Supabase.</p>
+      <h3 class="sub">Lessons</h3>
+      <p>A lesson page has a Monaco editor, an xterm.js terminal and a tests tab. A lesson starts from starter code, and the learner runs the tests against their own changes. Lesson content is stored as database migrations, and scripts validate each migration before it is applied.</p>
+      <h3 class="sub">Accounts, data and payments</h3>
+      <p>Supabase holds the PostgreSQL database, authentication with Google or GitHub, and Edge Functions. Every table has row-level security, and a user can read only their own rows. A database trigger creates the user's profile row at sign-up.</p>
+      <p>Stripe Checkout handles the subscription. An Edge Function receives the Stripe webhook and updates the user's subscription status. Other Edge Functions send notification and career emails and generate a personal insight for a user.</p>
+    </section>
+
+    <section id="stack" aria-label="Stack">
+      <h2>Stack</h2>
+      <dl class="stack">
+        <dt>Frontend</dt><dd>Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, shadcn/ui, Base UI</dd>
+        <dt>Lesson workspace</dt><dd>Monaco Editor, xterm.js, WebContainer API</dd>
+        <dt>Backend</dt><dd>Supabase: PostgreSQL, Auth, Edge Functions, row-level security</dd>
+        <dt>Payments</dt><dd>Stripe Checkout and webhooks</dd>
+        <dt>Container service</dt><dd>Node.js, Fastify, WebSocket, dockerode, jose</dd>
+        <dt>Lesson containers</dt><dd>Docker; an agent written in Go; images for Go, Python, Java, Kotlin, Spring Boot, NestJS and Node.js</dd>
+        <dt>Pipeline</dt><dd>TypeScript scripts, OpenRouter</dd>
+        <dt>Hosting</dt><dd>Vercel for the web application</dd>
+      </dl>
+    </section>
+
+    <section id="walkthrough" aria-label="Walkthrough">
+      <h2>Walkthrough</h2>
+      <figure class="walkthrough">
+        <video id="walkthrough-video" controls playsinline preload="none" width="1440" height="900" data-poster="../videos/northmark-walkthrough.webp" data-poster-narrow="../videos/northmark-walkthrough-800.webp" aria-label="Northmark walkthrough">
+          <source src="../videos/northmark-walkthrough-800.webm" type="video/webm" media="(max-width: 800px)">
+          <source src="../videos/northmark-walkthrough-800.mp4" type="video/mp4" media="(max-width: 800px)">
+          <source src="../videos/northmark-walkthrough.webm" type="video/webm">
+          <source src="../videos/northmark-walkthrough.mp4" type="video/mp4">
+        </video>
+        <figcaption><span class="dur">1:40</span> · A local copy of the application: the landing page, sign-in, the dashboard, insights, the skills explorer, a JavaScript lesson and a Python lesson, and the roadmap. The data is invented. No sound. <button class="expand" type="button" data-gallery="northmark" data-video="../videos/northmark-walkthrough" data-poster="../videos/northmark-walkthrough.webp" data-width="1440" data-height="900" data-loop="false" data-from="walkthrough-video" data-caption="Northmark walkthrough (1:40)">Open in the full-window viewer</button></figcaption>
+        <ol class="chapters" aria-label="Chapters">
+          <li><button type="button" data-t="0"><span class="ts">0:00</span>Landing</button></li>
+          <li><button type="button" data-t="11"><span class="ts">0:11</span>Sign-in</button></li>
+          <li><button type="button" data-t="15"><span class="ts">0:15</span>Dashboard</button></li>
+          <li><button type="button" data-t="22"><span class="ts">0:22</span>Insights</button></li>
+          <li><button type="button" data-t="32"><span class="ts">0:32</span>Skills explorer</button></li>
+          <li><button type="button" data-t="39"><span class="ts">0:39</span>Skill page</button></li>
+          <li><button type="button" data-t="53"><span class="ts">0:53</span>JavaScript lesson in WebContainers</button></li>
+          <li><button type="button" data-t="73"><span class="ts">1:13</span>Python lesson in the container service</button></li>
+          <li><button type="button" data-t="92"><span class="ts">1:32</span>Roadmap</button></li>
+        </ol>
+      </figure>
+    </section>
+
+    <section id="screenshots" aria-label="Screenshots">
+      <h2>Screenshots</h2>
+      <div class="gallery">
+        <figure><button class="thumb" type="button" data-gallery="northmark" data-full="../images/northmark-landing-1600.webp" data-caption="Landing page" aria-label="Open screenshot: Landing page"><img src="../images/northmark-landing-800.webp" srcset="../images/northmark-landing-800.webp 800w, ../images/northmark-landing-1600.webp 1600w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1023px) calc(50vw - 34px), 330px" width="800" height="500" alt="Landing page" loading="lazy" decoding="async"></button><figcaption>Landing page</figcaption></figure>
+        <figure><button class="thumb" type="button" data-gallery="northmark" data-full="../images/northmark-roadmap-1600.webp" data-caption="Roadmap page" aria-label="Open screenshot: Roadmap page"><img src="../images/northmark-roadmap-800.webp" srcset="../images/northmark-roadmap-800.webp 800w, ../images/northmark-roadmap-1600.webp 1600w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1023px) calc(50vw - 34px), 330px" width="800" height="500" alt="Roadmap page" loading="lazy" decoding="async"></button><figcaption>Roadmap page</figcaption></figure>
+      </div>
+    </section>
+
+    <footer><a href="../index.html">Luiz Consalter</a> · São Paulo, Brazil</footer>
+  </main>
+
+</div>
+<script src="../assets/site.js" defer></script>
+<script src="../assets/lightbox.js" defer></script>
+<script src="../assets/walkthrough.js" defer></script>
+</body>
+</html>
