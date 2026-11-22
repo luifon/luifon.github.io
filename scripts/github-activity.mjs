@@ -184,7 +184,7 @@ function renderBlock(data, svgSize) {
   const alt = `Heatmap of GitHub contributions by day: ${summary(data)}.`;
   return [
     START_MARK,
-    `      <div class="heatmap"><a href="${PROFILE_URL}"><img src="images/github-activity.svg?v=${version}" width="${svgSize.width}" height="${svgSize.height}" alt="${escapeXml(alt)}" loading="lazy" decoding="async"></a></div>`,
+    `      <div class="heatmap"><a href="${PROFILE_URL}"><img src="images/github-activity.svg?v=${version}" width="${svgSize.width}" height="${svgSize.height}" alt="${escapeXml(alt)}" decoding="async"></a></div>`,
     `      <p class="activity"><span class="strong">${formatCount(data.total)} contributions</span> in the past year · <a href="${PROFILE_URL}" class="more-inline">github.com/${LOGIN}<span aria-hidden="true">↗</span></a></p>`,
     `      ${END_MARK}`,
   ].join('\n');
